@@ -17,22 +17,19 @@ function clone(obj) {
     return copy;
 }
 
-var imgObj = {};
-
 readBMP(function(err, data) {
-	imgObj = callback(err, data);
+	var imgObj = callback(err, data);
 	
 	// create a copy of the imageobj
-	
 	var imgObj2 = clone(imgObj);
 	
-	brightness(imgObj.pixels);
-	writeImg(filename2, imgObj);
-	
-	console.log(imgObj.pixels[1]);
-	
-	//greyScale tranformation and write
-	greyScale(imgObj2.pixels);
-	console.log(imgObj2.pixels[1]);
-	writeImg(filename1, imgObj2);
+	console.log(imgObj.pixels[100]);
+//	greyScale(imgObj.pixels);
+//	console.log(imgObj.pixels[20]);
+//	writeImg(filename1, imgObj);
+//	
+	console.log(imgObj2.pixels[100]);
+	brightness(imgObj2.pixels);
+	console.log(imgObj2.pixels[100]);
+	writeImg(filename2, imgObj2);
 });

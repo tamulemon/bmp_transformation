@@ -16,3 +16,6 @@ takes an object with the format that is the same as the object returned by read_
 
 > test.js -- written by Meng Chen
 contains the test for the two main module: read_bmp_async_export and convert_buffer_to_bmp. Run the test will create a new img in the current working dir 'testimg.bmp'
+
+> change_palette_img.js — written by Meng Chen
+change the palette color of an imag with palette version. Swap blue and red channel. Work directly off of buffer. Doesn’t involve modules.
