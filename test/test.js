@@ -6,21 +6,25 @@ var readBMP = require('../read_bmp_asyn_export.js').readBMP,
 		fs = require('fs');
 
 describe('updated test', function() {
-	describe('read_bmp_asyn_export.js', function() {
-		it('will read the bmp file, convert to an object and export it', function() {
-			readBMP(function(err, data) {
-				var imgObj = callback(err, data);
-				expect(imgObj.type).equal('BM');
+	
+	// run read file before testing cases
+	var imgObj = {};
+	before(function(done) {
+		readBMP(function(err, data) {
+			imgObj = callback(err, data);
+			done();
 		});
 	});
-});
+	
+	describe('read_bmp_asyn_export.js', function() {
+		it('will read the bmp file, convert to an object and export it', function() {
+			expect(imgObj.type).equal('BM');
+		});
+	});
+	
 	describe('convert_buffer_to_bmp', function() {
-		it('will write a js object back to the bmp file', function(done) {
-			readBMP(function(err, data) {
-				var imgObj = callback(err, data);
-				buildImage(dest, imgObj);
-				done();
-				});
+		it('will write a js object back to the bmp file', function() {
+			buildImage(dest, imgObj);
 			fs.exists('/Users/mengchen/CF_Homework/bim_transformation_meng/testimg.bmp', function (exist) {
 				console.log(exist);
 				expect(exist).to.be.true;
