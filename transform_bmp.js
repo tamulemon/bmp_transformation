@@ -8,30 +8,31 @@ var fs = require('fs');
 var greyScale = require('./transformation.js').greyScale;
 var brightness = require('./transformation.js').brightness;
 
-//function clone(obj) {
-//    if (null == obj || "object" != typeof obj) return obj;
-//    var copy = obj.constructor();
-//    for (var attr in obj) {
-//        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
-//    }
-//    return copy;
-//}
+function clone(obj) {
+    if (null == obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    }
+    return copy;
+}
+
+var imgObj = {};
 
 readBMP(function(err, data) {
-	var imgObj = callback(err, data);
-
-	var pixelArrayOriginal = [];
-	for (var i = 0; i < imgObj.pixels.length; i++) {
-		pixelArrayOriginal.push(imgObj.pixels[i]);
-	}
+	imgObj = callback(err, data);
 	
-	// brightness transformation and write
+	// create a copy of the imageobj
+	
+	var imgObj2 = clone(imgObj);
+	
 	brightness(imgObj.pixels);
 	writeImg(filename2, imgObj);
 	
-	imgObj.pixels = pixelArrayOriginal;
+	console.log(imgObj.pixels[1]);
 	
 	//greyScale tranformation and write
-	greyScale(imgObj.pixels);
-	writeImg(filename1, imgObj);
+	greyScale(imgObj2.pixels);
+	console.log(imgObj2.pixels[1]);
+	writeImg(filename1, imgObj2);
 });
