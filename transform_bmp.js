@@ -21,15 +21,17 @@ readBMP(function(err, data) {
 	var imgObj = callback(err, data);
 	
 	// create a copy of the imageobj
+	
+	//why the deep copy didn't seem to work here??????
 	var imgObj2 = clone(imgObj);
 	
-	console.log(imgObj.pixels[100]);
-//	greyScale(imgObj.pixels);
+//	console.log(imgObj.pixels[100]);
+	greyScale(imgObj.pixels);
 //	console.log(imgObj.pixels[20]);
-//	writeImg(filename1, imgObj);
+	writeImg(filename1, imgObj);
 //	
-	console.log(imgObj2.pixels[100]);
+//	console.log(imgObj2.pixels[100]);
 	brightness(imgObj2.pixels);
-	console.log(imgObj2.pixels[100]);
+//	console.log(imgObj2.pixels[100]);
 	writeImg(filename2, imgObj2);
 });
